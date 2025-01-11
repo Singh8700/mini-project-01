@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="m-0">
+    <header class="header text-zinc-200 flex w-full justify-center flex-wrap items-center text-center">
+        <div class="left w-[60vw]">
+            Welcome
+        </div>
+        <div class="w-[35vw] flex items-right  justify-around right">
+            <% if(cookies){%>
+                <form action="/user/logout" method="post">
+                    <button type="submit" class="btn px-4 py-2 bg-zinc-700 rounded text-zinc-300 hover:text-zinc-200 active:bg-zinc-500 action:text-zinc-700">
+                        Logout
+                    </button>
+                </form>
+                <a href="/user/post">
+                    <button class="btn px-4 py-2 bg-zinc-700 rounded text-zinc-300 hover:text-zinc-200 active:bg-zinc-500 action:text-zinc-700">
+                        Create post
+                    </button>
+                </a>
+          <%  }else { %>
+            <a href="/user/login">
+                <button class="btn px-4 py-2 bg-zinc-700 rounded text-zinc-300 hover:text-zinc-200 active:bg-zinc-500 action:text-zinc-700">
+                    Sing In
+                </button>
+            </a>
+            <a href="/user/register">
+                <button class=" px-4 py-2 bg-zinc-700 rounded text-zinc-300 hover:text-zinc-200 active:bg-zinc-500 action:text-zinc-700">
+                    Sing Up
+                </button>
+            </a>
+         <% } %>
+           
+           
+        </div>
+    </header>
+
+    
+</body>
+</html>

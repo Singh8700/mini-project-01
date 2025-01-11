@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="title w-full flex justify-end items-center text-zinc-200 pr-6 mb-5">
+        <p class="mr-1">Wel<span class="text-green-300">Come</span> to </p>
+        <h2 class="text-zinc-100 mr-6"><%= data.fullName %> 👋</h2>
+        <a href="/" class="btn border py-1 px-3 rounded-xl active:bg-zinc-100 active:text-zinc-900 hover:bg-zinc-300 hover:text-zinc-900">
+            <button type="submit">Back</button>
+        </a>
+    </div>
+    <div class="w-full text-zinc-400 text-center mb-8">
+        <h3>You can create a New Post.</h3>
+    </div>
+    <!-- main section -->
+    <div class="form flex justify-center items-center w-full px-8 flex-col " id="add">
+        <!-- add post button -->
+        <div class="btn mb-2" onclick="addPost()">
+            <button class="border px-3 py-2 text-zinc-200 rounded">Add New Post</button>
+        </div>
+        <!-- new post form -->
+       <div class="form w-full absolute top-0  h-full flex flex-col justify-center items-center backdrop-blur hidden" id="close">
+        <div class="icon absolute top-5 right-0 pr-5" onclick="closePost()">
+            <span class="cursor-pointer text-zinc-400">Close</span>
+        </div>
+        <form class="flex flex-col justify-center items-center" action="/user/post" method="post">
+            <input 
+            type="text"
+            class="mb-4 bg-transparent text-zinc-100 rounded-md  sm:w-[600px] md:w-[780px] lg:w-[1080px] 2xl:w-[1280px] p-3"
+            placeholder="Title"
+            name="title"
+            id="title"
+            required
+            >
+            <textarea 
+            placeholder="What's on your mind ?"
+            class="resize-none sm:w-[600px] md:w-[780px] lg:w-[1080px] 2xl:w-[1280px]
+            h-[400px] p-3 bg-transparent border-2 border-zinc-700 rounded-md mb-10 text-zinc-200" 
+            name="post" 
+            id="post"
+            required
+            ></textarea>
+            <button 
+            class="text-zinc-300 bg-zinc-900 w-1/4 py-3 px-2 rounded-xl border"
+            type="submit" 
+            value="Create a Post"
+            onclick="check()">Create a New Post</button>
+        </form>
+       </div>
+    </div>
+<!-- form section end -->
+ <!-- all user posts -->
+        <div class="posts mt-3 pl-5 text-zinc-400 text-2xl">
+            <h3>Your Post.</h3>
+        </div>
+        <!-- post details -->
+         <div class="postcontainer p-3 flex flex-wrap justify-around items-center gap-3">
+            <!-- post 01 -->
+            
+            <% data.posts.reverse().forEach((item)=>{%>
+                <div class="post w-[350px] p-4 rounded-md border bg-transparent text-zinc-200 lg:w-[450px]">
+                    <div class="admin">
+                    <h3 class="text-blue-500 capitalize font-serif text-right">
+                        <%= data.fullName %>
+                    </h3>
+                </div>
+                <div class="content">
+                    <h4 class="text-zinc-300 capitalize font-bold">
+                        <%= item.title %>
+                    </h4>
+                    <p class="p-2 text-sm tracking-tight">
+                        <%= item.post %>
+                    </p>
+                </div>
+                <div class="btn flex gap-4 capitalize mt-5">
+                    <a 
+                    href=""
+                    class="text-blue-500">
+                    like
+                    </a>
+                    <a 
+                    href=""
+                    class="text-zinc-700">
+                    edit
+                    </a>
+                </div>
+                </div>
+           <% })%>
+         </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>
