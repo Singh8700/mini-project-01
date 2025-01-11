@@ -15,13 +15,9 @@ app.use(cookieParser())
 
 db()
 
-
+const IndexRoutes = require("./userData/index.user")
 // create first routes
-app.get("/",(req,res)=>{
-    res.render("index",{
-        cookies:req.cookies.user
-    })
-})
+app.get("/",IndexRoutes)
 
 // custom routers
 const RegisterData = require("./userData/register.user")

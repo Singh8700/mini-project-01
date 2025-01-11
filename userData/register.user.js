@@ -35,6 +35,7 @@ routes.post("/register-data",async(req,res)=>{
     res.cookie("user",jwtPassword)
     // res.json(req.body)
     console.log("Registeration Done")
+    console.log(req.cookies.user)
     res.redirect("/")
 })
 
