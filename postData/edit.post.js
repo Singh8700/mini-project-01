@@ -8,14 +8,14 @@ route.get("/edit/:id",authenticationCheck,async(req,res)=>{
     const userPostData = await userPost.findOne({
         _id:req.params.id
     })
-    console.log("edit post",userPostData)
+    // console.log("edit post",userPostData)
     res.render("edit",{
         data:userPostData
     })
 })
 
 route.post("/editPost/:id",async(req,res)=>{
-    console.log(req.params.id)
+    // console.log(req.params.id)
     const {title,post} = await req.body
     // console.log("title is ",title,"post is ",post)
     const userData = await userPost.findOneAndUpdate(
