@@ -15,8 +15,14 @@ route.get("/like/:id",authenticationCheck,async(req,res)=>{
         const userRemove = post.likes.indexOf(req.user._id)
         await post.likes.splice(userRemove, 1)
     }
+    
     await post.save()
-    res.redirect("/user/post")
+
+    if(post._id == req.params.is){
+        res.redirect("/user/post")
+    }else{
+        res.redirect("/")
+    }
 })
 
 

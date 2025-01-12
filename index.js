@@ -26,7 +26,7 @@ const logOut = require("./userData/logout.user")
 const ProfileData = require("./userData/profile.user")
 const userPost = require("./userData/usrePost")
 const postLike = require("./postData/like.data")
-
+const editPost = require("./postData/edit.post")
 
 
 
@@ -36,6 +36,7 @@ app.use("/user",logOut)
 app.get("/user/post",authenticationCheck,ProfileData)
 app.use("/user",userPost)
 app.use("/user",postLike)
+app.use("/user",editPost)
 // app routes init by express server
 app.listen(9000,()=>{
     console.log("servre is running")
