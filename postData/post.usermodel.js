@@ -22,16 +22,16 @@ const post = mongoose.Schema({
         lowercase:true,
         required:true,
         trim:true,
-        minlength: [3, 'title Must Be at least 3 characters long'],
-        likes : [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref:"user"
-            }
-        ]
+        minlength: [3, 'title Must Be at least 3 characters long']
     },
+    likes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"user"
+        }
+    ]
 })
 
-const userPost = mongoose.model("userPost",post)
+const userPost = mongoose.model("userPosts",post)
 
 module.exports = userPost

@@ -7,7 +7,7 @@ const routes = express.Router()
 routes.post("/post",authenticationCheck,async(req,res)=>{
     const userData = await userModel.findOne({userName:req.user.userName})
     const {title,post} = req.body
-    console.log(userData._id)
+    // console.log(userData._id)
     const createPost = await userPost.create({
         user: userData._id,
         title,

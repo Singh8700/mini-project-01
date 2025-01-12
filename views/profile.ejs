@@ -79,14 +79,15 @@
                         <%= item.post %>
                     </p>
                 </div>
-                <div class="btn flex gap-4 capitalize mt-5">
-                    <a 
-                    href=""
-                    class="text-blue-500">
+                <div class="btn flex gap-1 capitalize mt-5">
+                    <h4 class="text-zinc-100"><%= item.likes.length %> </h4>
+                    <a
+                    href="/user/like/<%= item._id %>"
+                    class="text-blue-500 mr-4">
                     like
                     </a>
                     <a 
-                    href=""
+                    href="/edit"
                     class="text-zinc-700">
                     edit
                     </a>

@@ -33,7 +33,7 @@ const userDetails =  new mongoose.Schema({
         },
         posts:[{
             type: mongoose.Schema.Types.ObjectId,
-            ref : "userPost"
+            ref : "userPosts"
         }]
     })
 
