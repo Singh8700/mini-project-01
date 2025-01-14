@@ -22,13 +22,13 @@ routes.post("/login-data",async(req,res,next)=>{
         return next()
     }
 
-    bcrypt.compare(password,userData.password,async (error,result)=>{
+    await bcrypt.compare(password,userData.password,async (error,result)=>{
         if(error){
-            res.status(400).json({
+           return res.status(400).json({
                 msg:"Something want Worng"
             })
-            console.log(result)
-            return next()
+            // console.log(result)
+            // return next()
         }
         const jwtPassword = await jwt.sign({password:password, userId:userData._id,email:email},process.env.JWT_SECRET)
 

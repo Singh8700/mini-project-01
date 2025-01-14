@@ -24,7 +24,7 @@ routes.post("/register-data",async(req,res)=>{
             msg:"This userName is already exists"
         })
     }
-    const hashPasword = await bcrypt.hash(password,11)
+    const hashPasword = await bcrypt.hash(password,10)
    const user = await userModel.create({
         userName,
         fullName,
