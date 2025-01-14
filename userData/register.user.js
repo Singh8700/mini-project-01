@@ -2,7 +2,7 @@ const express = require("express")
 const userModel = require("../models/user.model")
 const routes = express.Router()
 const jwt =require("jsonwebtoken")
-const bcrypt = require("bcrypt")
+
 const auth = require("../middleware/authentication.checkModule")
 
 routes.get("/register",(req,res)=>{
@@ -24,12 +24,12 @@ routes.post("/register-data",async(req,res)=>{
             msg:"This userName is already exists"
         })
     }
-    const hashPasword = await bcrypt.hash(password,10)
+   
    const user = await userModel.create({
         userName,
         fullName,
         email,
-        password:hashPasword
+        password
     })
     const jwtPassword = jwt.sign({password:password, userId:user._id,email:email},process.env.JWT_SECRET)
     res.cookie("user",jwtPassword)

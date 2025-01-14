@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require("bcrypt")
 
 const userDetails =  new mongoose.Schema({
         userName: {
@@ -37,6 +38,24 @@ const userDetails =  new mongoose.Schema({
         }]
     })
 
+
+    // data save middleware
+userDetails.pre("save", async function (next){
+    const user = this
+
+    if(!user.isDirectModified("password")){
+        next()
+    }
+    try{
+
+        const saltRound = await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(user.password,saltRound)
+        user.password = hashPassword
+
+    }catch (e){
+        next(e)
+    }
+})
 
 const userModel = mongoose.model('user',userDetails)
 
