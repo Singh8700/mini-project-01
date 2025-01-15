@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 
 const userDetails =  new mongoose.Schema({
         userName: {
@@ -28,8 +28,6 @@ const userDetails =  new mongoose.Schema({
         password: {
             type: String,
             required: true,
-            lowercase: true,
-            trim: true,
             minlength: [6, 'Username Must Be at least 6 characters long']
         },
         posts:[{
@@ -47,10 +45,9 @@ userDetails.pre("save", async function (next){
         next()
     }
     try{
-
-        const saltRound = await bcrypt.genSalt(10)
-        const hashPassword = await bcrypt.hash(user.password,saltRound)
-        user.password = hashPassword
+        const saltRound = 10;
+        const hashPassword = await bcrypt.hashSync(user.password,saltRound);
+        user.password = await hashPassword;
 
     }catch (e){
         next(e)

@@ -1,6 +1,6 @@
 const express = require("express")
 const routes = express.Router()
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const userModel = require("../models/user.model")
 const jwt = require("jsonwebtoken")
 routes.get("/login",(req,res)=>{
@@ -21,21 +21,24 @@ routes.post("/login-data",async(req,res,next)=>{
         })
         return next()
     }
-
-    await bcrypt.compare(password,userData.password,async (error,result)=>{
-        if(error){
-           return res.status(400).json({
-                msg:"Something want Worng"
-            })
-            // console.log(result)
-            // return next()
-        }
-        const jwtPassword = await jwt.sign({password:password, userId:userData._id,email:email},process.env.JWT_SECRET)
+    console.log(password)
+    const oldPassword = userData.password
+    console.log(oldPassword)
+    const result = await bcrypt.compareSync(password,oldPassword)
+    if(result){
+            console.log("password", result)
+            const jwtPassword = await jwt.sign({password:password, userId:userData._id,email:email},process.env.JWT_SECRET)
 
         await  res.cookie("user",jwtPassword)
 
         res.redirect("/")
-    })
+        }else{
+            console.log("password", result)
+            res.status(400).json({
+                msg:"Soemthing want wrongs"
+            })
+        }
+ 
 
     
 })
